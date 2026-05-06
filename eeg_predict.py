@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 
 from metrics import *
-from encoding import *  # Make sure your closed-form fit_ridge_encoding is in here!
+from encoding import *  
 from data_io import *
 
 def run_eeg_pipeline(
@@ -34,7 +34,7 @@ def run_eeg_pipeline(
         alpha_grid = np.logspace(0, 7, 15)
 
     target_key = f"{subject}/{roi}"
-    print(f"\n{'='*60}\n🚀 STARTING EEG PIPELINE: {target_key}\n{'='*60}")
+    print(f"\n{'='*60}\n STARTING EEG PIPELINE: {target_key}\n{'='*60}")
     wall_start = time.time()
 
     # ---------------------------------------------------------

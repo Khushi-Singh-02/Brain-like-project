@@ -40,7 +40,7 @@ def fit_ridge_encoding_closed_form(X_train, Y_train, DEVICE, val_frac=0.15, seed
     for alpha in alpha_grid:
         t0 = time.time()
         inv = 1.0 / (eigvals + float(alpha))
-        Yv_hat = (KvU * inv) @ UtY + y_mean           # ADD MEAN BACK
+        Yv_hat = (KvU * inv) @ UtY + y_mean         
         score = float(np.nanmean(pearson_r_per_unit(Yvl, Yv_hat.cpu().numpy())))
         marker = " ◀ best so far" if score > best_score else ""
         print(f"        α={alpha:.1e}  val_r={score:.4f}{marker}  ({time.time()-t0:.2f}s)")
@@ -70,7 +70,7 @@ def fit_ridge_encoding_closed_form(X_train, Y_train, DEVICE, val_frac=0.15, seed
     del X_full_t, Y_full_t, Y_full_c, gamma
     torch.cuda.empty_cache()
 
-    return beta, mean_f, std_f, y_mean_f, best_alpha   # ← NOW RETURNS y_mean_f TOO
+    return beta, mean_f, std_f, y_mean_f, best_alpha   
 
 
 def fit_ridge_encoding_adam(X_train, Y_train, DEVICE, val_frac=0.15, seed=42,
@@ -163,7 +163,6 @@ def fit_ridge_encoding_adam(X_train, Y_train, DEVICE, val_frac=0.15, seed=42,
 
 
 def eval_encoding(beta, mean, std, y_mean, X_test, Y_test, nc_flat, DEVICE, nc_scale=100.0, nc_threshold=10.0):
-    # Assuming DEVICE is passed or defined globally in the module
     X_test_t = torch.from_numpy(X_test.astype(np.float32)).to(DEVICE)
     X_test_t = (X_test_t - mean) / std
     with torch.no_grad():

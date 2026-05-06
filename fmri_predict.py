@@ -11,7 +11,7 @@ from data_io import *
 
 def run_nsd_pipeline(
     subject: str,
-    rois: list[str],      # <--- Now accepts a LIST of ROIs
+    rois: list[str],    
     rsa_fn,
     cka_fn,
     DEVICE,
@@ -33,7 +33,7 @@ def run_nsd_pipeline(
     if alpha_grid is None:
         alpha_grid = np.logspace(0, 7, 15)
 
-    print(f"\n{'='*60}\n🚀 STARTING NSD PIPELINE: {subject}\n  Targets: {rois}\n{'='*60}")
+    print(f"\n{'='*60}\n STARTING NSD PIPELINE: {subject}\n  Targets: {rois}\n{'='*60}")
     wall_start = time.time()
 
     # ---------------------------------------------------------
